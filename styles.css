@@ -1,0 +1,642 @@
+/* 공통 스타일 */
+/* .map_wrap과 그 내부 모든 요소의 기본 여백(margin)과 패딩(padding)을 0으로 설정하고,
+   폰트를 'Malgun Gothic'과 '돋움' 등으로 지정, 글자 크기는 12px로 설정 */
+   .map_wrap, .map_wrap * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+    font-size: 12px;
+}
+
+/* .map_wrap 내의 링크(a) 요소와 그 상태들(hover, active)에 대해
+   파란색(#007BFF)으로 링크 색상 지정, 밑줄 제거 */
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+/* .map_wrap의 크기를 지정하고 위치를 상대적으로 설정하여 내부 요소들이 이 안에서 배치되도록 함 */
+.map_wrap {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+}
+
+/* 지도(map) 요소의 크기를 부모 요소의 100%로 설정하고, 위치를 상대적으로 설정하여 
+   넘치는 콘텐츠는 숨김 처리 */
+#map {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 메뉴 및 검색창 스타일 */
+/* 검색창(search_wrap)을 페이지 내 특정 위치(top 10px, left 10px)에 고정하고,
+   너비를 250px로 지정, 배경색을 반투명 흰색으로 설정 */
+#search_wrap {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 250px;
+    margin: 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 2; /* z-index를 높여 다른 요소보다 위에 표시되도록 설정 */
+    font-size: 12px;
+    border-radius: 8px; /* 모서리를 둥글게 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 추가 */
+}
+
+/* 메뉴(menu_wrap)를 검색창 아래(top 70px, left 10px)에 고정하고,
+   너비와 높이를 설정, 스크롤 가능한 자동 넘침을 활성화 */
+#menu_wrap {
+    position: absolute;
+    top: 70px;
+    left: 10px;
+    width: 250px;
+    height: 80%;
+    margin: 0;
+    padding: 10px;
+    overflow-y: auto; /* 수직 스크롤바 활성화 */
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 1; /* 검색창보다 아래에 표시되도록 설정 */
+    font-size: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 추가 */
+    display: none; /* 기본적으로 메뉴는 숨김 처리 */
+}
+
+/* 메뉴 내부에 있는 수평선(hr)의 높이를 1px로 설정하고, 위쪽에 2px의 어두운 색(border) 선을 추가 */
+#menu_wrap hr {
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #5F5F5F;
+    margin: 3px 0;
+}
+
+/* 메뉴 옵션(option)을 중앙에 정렬 */
+#menu_wrap .option {
+    text-align: center;
+}
+
+/* 옵션 내 버튼(button)의 왼쪽에 여백을 주고, 버튼의 크기와 모양을 지정 */
+#menu_wrap .option button {
+    margin-left: 5px;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 8px; /* 버튼 모서리를 둥글게 */
+    border: none; /* 버튼의 테두리 제거 */
+    background-color: #007BFF; /* 파란색 배경 */
+    color: white; /* 버튼 텍스트 색상을 흰색으로 */
+    cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+    transition: background-color 0.3s, transform 0.2s; /* 색상과 크기 변화에 애니메이션 효과 추가 */
+}
+
+/* 버튼에 마우스를 올렸을 때, 배경색을 어둡게 하고 버튼이 살짝 커지게 함 */
+#menu_wrap .option button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* 검색 결과 리스트 스타일 */
+/* 검색 결과 리스트의 각 항목(li)에서 기본적인 불릿 스타일을 제거 */
+#placesList li {
+    list-style: none;
+}
+
+/* 검색 결과 항목(item)의 위치와 크기를 지정하고, 클릭 가능한 스타일로 설정 */
+#placesList .item {
+    position: relative;
+    border-bottom: 1px solid #888; /* 아래쪽에 얇은 회색 선 추가 */
+    cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+    min-height: 65px; /* 최소 높이 설정 */
+    display: block;
+}
+
+/* 검색 결과 항목에 마우스를 올려도 배경색이 바뀌지 않도록 설정 */
+#placesList .item:hover {
+    background-color: transparent;
+}
+
+/* 검색 결과 항목의 텍스트를 블록 단위로 설정하고 위쪽에 여백 추가 */
+#placesList .item span {
+    display: block;
+    margin-top: 4px;
+}
+
+/* 검색 결과 항목 내의 제목(h5)과 정보(info)의 글자 색과 크기를 지정 */
+#placesList .item h5,
+#placesList .item .info {
+    text-overflow: ellipsis; /* 텍스트가 넘치면 생략 표시(...) 추가 */
+    overflow: hidden;
+    white-space: nowrap; /* 텍스트를 한 줄로 표시 */
+    font-size: 12px;
+    color: #000;
+}
+
+/* 검색 결과 항목 내 정보(info) 부분에 padding을 추가 */
+#placesList .info {
+    padding: 10px 0 10px 55px; /* 왼쪽에 더 많은 패딩 추가 */
+}
+
+/* 회색 텍스트 스타일을 정의 */
+#placesList .info .gray {
+    color: #8a8a8a;
+}
+
+/* 주소(jibun) 부분에 배경 이미지를 추가 */
+#placesList .info .jibun {
+    padding-left: 26px;
+    background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
+}
+
+/* 전화번호(tel) 부분의 텍스트 색상을 초록색으로 설정 */
+#placesList .info .tel {
+    color: #009900;
+}
+
+/* 마커(markerbg)의 위치와 크기를 설정하고, 배경 이미지를 설정 */
+#placesList .item .markerbg {
+    position: absolute;
+    left: 20px;
+    top: 20%; /* 상단에서 20% 내려오도록 설정 */
+    width: 36px;
+    height: 37px;
+    background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
+    z-index: 10; /* 다른 요소들보다 위에 표시되도록 설정 */
+}
+
+/* 페이지 네비게이션(pagination) 스타일 */
+/* 페이지 네비게이션을 중앙에 정렬하고 위아래에 여백을 줌 */
+#pagination {
+    margin: 10px auto;
+    text-align: center;
+}
+
+/* 페이지 네비게이션의 링크(a)를 블록으로 설정하고, 여백과 크기를 지정 */
+#pagination a {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* 페이지 네비게이션 링크에 마우스를 올렸을 때 배경색과 크기를 변경 */
+#pagination a:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* 현재 페이지(on)에 대한 스타일, 굵은 글자로 표시하고 색상을 회색으로 변경 */
+#pagination .on {
+    font-weight: bold;
+    cursor: default;
+    color: #777;
+}
+
+/* edit 클래스 스타일 */
+/* edit 요소의 위치를 페이지의 오른쪽 상단에 고정하고, 크기와 배경색을 설정 */
+.edit {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    background-color: #f9f9f9;
+    border: 2px solid #007BFF;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 버튼과 텍스트 사이에 간격 추가 */
+}
+
+/* edit 요소 내의 버튼 스타일 */
+.edit button {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* edit 요소 내 버튼에 마우스를 올렸을 때 배경색과 크기를 변경 */
+.edit button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* 버튼을 클릭했을 때 배경색을 더 어둡게 설정 */
+.edit button:active {
+    background-color: #004085;
+}
+
+/* edit 요소 내 텍스트(span) 스타일 */
+.edit span {
+    font-size: 16px;
+    color: #007BFF;
+    font-weight: bold; /* 텍스트를 굵게 표시 */
+}
+
+/* 커스텀 마커 이미지 버튼의 기본 스타일을 재설정 */
+#markerImageButton {
+    all: unset; /* 모든 기본 스타일을 제거 */
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* 카테고리 스타일 */
+/* 카테고리 리스트(category)를 페이지의 오른쪽 하단에 고정하고, 크기와 배경색을 설정 */
+#category {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 8px;
+    border: 2px solid #007BFF;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #f9f9f9;
+    overflow: hidden;
+    z-index: 2;
+}
+
+/* 카테고리 리스트 항목(li) 스타일 */
+#category li {
+    float: left; /* 항목들을 왼쪽으로 정렬 */
+    list-style: none; /* 불릿 스타일 제거 */
+    width: 50px;
+    border-right: 1px solid #acacac;
+    padding: 10px 0;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* 선택된 카테고리 항목(on)에 대한 스타일 */
+#category li.on {
+    background: #e6f2ff;
+}
+
+/* 카테고리 항목에 마우스를 올렸을 때 배경색과 크기를 변경 */
+#category li:hover {
+    background: #d0e4ff;
+    border-left: 1px solid #007BFF;
+    margin-left: -1px;
+    transform: scale(1.05);
+}
+
+/* 마지막 카테고리 항목의 오른쪽 테두리(border)를 제거 */
+#category li:last-child {
+    margin-right: 0;
+    border-right: 0;
+}
+
+/* 카테고리 항목 내 아이콘을 중앙에 배치하고 크기를 지정 */
+#category li span {
+    display: block;
+    margin: 0 auto 3px;
+    width: 27px;
+    height: 28px;
+}
+
+/* 각 카테고리 아이콘의 배경 이미지를 설정 */
+#category li .category_bg {
+    background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png) no-repeat;
+}
+
+/* 각 카테고리의 배경 이미지 위치를 설정 */
+#category li .bank { background-position: -10px 0; }
+#category li .mart { background-position: -10px -36px; }
+#category li .pharmacy { background-position: -10px -72px; }
+#category li .oil { background-position: -10px -108px; }
+#category li .cafe { background-position: -10px -144px; }
+#category li .store { background-position: -10px -180px; }
+#category li.on .category_bg { background-position-x: -46px; }
+
+/* 마커 클릭 시 정보창 스타일 */
+/* 마커 클릭 시 표시되는 정보창(placeinfo_wrap)의 위치를 설정 */
+.placeinfo_wrap {
+    position: absolute;
+    bottom: 28px;
+    left: -150px;
+    width: 300px;
+}
+
+/* 정보창(placeinfo)의 스타일을 지정 */
+.placeinfo {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid #007BFF;
+    padding-bottom: 10px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 정보창 아래쪽에 작은 삼각형 모양의 요소 추가 */
+.placeinfo_wrap .after {
+    content: '';
+    position: relative;
+    margin-left: -12px;
+    left: 50%;
+    width: 22px;
+    height: 12px;
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');
+}
+
+/* 정보창 내의 링크와 텍스트(span)의 기본 스타일을 설정 */
+.placeinfo a, .placeinfo span {
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* 정보 창 내 제목(title)의 기본 스타일을 설정 */
+.placeinfo .title {
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 8px 8px 0 0;
+    margin: -1px;
+    padding: 10px;
+    color: white; /* 기본 글자 색상 */
+    background: #007BFF url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
+    text-decoration: none;
+    display: block;
+}
+
+/* 제목(title)에 마우스를 올렸을 때의 스타일 */
+.placeinfo .title:hover {
+    color: #FF8C00; /* 다크 오렌지 색상으로 변경 */
+}
+
+
+/* 정보창 내 전화번호(tel)의 색상을 초록색으로 설정 */
+.placeinfo .tel {
+    color: #0f7833;
+}
+
+/* 정보창 내 주소(jibun)의 텍스트 색상과 크기를 설정 */
+.placeinfo .jibun {
+    color: #999;
+    font-size: 11px;
+}
+
+/* 아이콘 컨테이너 스타일 */
+/* 아이콘 컨테이너(icon-container)의 위치를 페이지의 오른쪽 중간에 고정하고,
+   크기와 배경색을 지정 */
+.icon-container {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%) scale(0.8); /* 아이콘 컨테이너를 세로축 중앙에 배치하고 크기를 줄임 */
+    display: flex;
+    flex-direction: column; /* 아이콘을 세로로 배치 */
+    gap: 15px; /* 아이콘들 사이에 간격 추가 */
+    z-index: 1000; /* 아이콘이 가장 위에 표시되도록 설정 */
+    background-color: #f9f9f9;
+    border: 2px solid #007BFF;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 아이콘 이미지의 크기와 기본 스타일을 설정 */
+.icon-container img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+    transition: transform 0.2s, background-color 0.3s; /* 크기와 배경색 변화에 애니메이션 효과 추가 */
+    border-radius: 8px;
+}
+
+/* 아이콘에 마우스를 올렸을 때 크기와 배경색을 변경 */
+.icon-container img:hover {
+    transform: scale(1.2);
+    background-color: #e6f2ff;
+}
+
+/* 거리 계산 및 정보 오버레이 스타일 */
+/* 작은 점(dot)의 크기와 배경 이미지를 설정 */
+.dot {
+    float: left;
+    width: 12px;
+    height: 12px;
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png');
+}
+
+/* 거리 오버레이(dotOverlay)와 정보(info) 창의 기본 스타일을 설정 */
+.dotOverlay, .info {
+    position: relative;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    border-bottom: 2px solid #ddd;
+    font-size: 12px;
+    padding: 5px;
+    background: #fff;
+    margin: 0;
+    list-style: none;
+}
+
+/* 거리 오버레이와 정보 창 내 숫자 텍스트의 스타일을 설정 */
+.dotOverlay .number, .info .number {
+    font-weight: bold; /* 숫자를 굵게 표시 */
+}
+
+/* 거리 오버레이와 정보 창 아래쪽에 작은 삼각형 모양의 요소 추가 */
+.dotOverlay:after, .info:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    margin-left: -6px;
+    bottom: -8px;
+    width: 11px;
+    height: 8px;
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png');
+}
+
+/* 거리 정보(distanceInfo)의 위치와 기본 스타일을 설정 */
+.distanceInfo {
+    position: relative;
+    top: 5px;
+    left: 5px;
+}
+
+/* 거리 정보와 정보 창 내 레이블(label)의 크기를 설정 */
+.distanceInfo .label, .info .label {
+    display: inline-block;
+    width: 50px;
+}
+
+/* 검색 섹션 스타일 */
+/* 검색창 내부 폼(option form)을 수평으로 배치하여, 
+   검색 입력 필드와 버튼들이 한 줄로 정렬되도록 설정 */
+#search_wrap .option form {
+    display: flex;
+    align-items: center;
+}
+
+/* 검색 입력 필드의 크기와 모양을 설정 */
+#search_wrap input[type="text"] {
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid #007BFF;
+    margin-right: 10px;
+    flex-grow: 1; /* 입력 필드가 가능한 최대 너비를 차지하도록 설정 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함하여 너비를 계산 */
+}
+
+/* 검색 버튼(searchButton)의 스타일을 설정 */
+#searchButton {
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s; /* 크기 변화에 애니메이션 효과 추가 */
+}
+
+/* 검색 버튼 내 아이콘 이미지의 크기를 설정 */
+#searchButton img {
+    width: 24px;
+    height: 24px;
+}
+
+/* 검색 버튼에 마우스를 올렸을 때 크기를 변경 */
+#searchButton:hover {
+    transform: scale(1.1);
+}
+
+/* 삭제 아이콘의 크기와 커서 모양을 설정 */
+.icon-clear {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* geocoder관련 css 설정 */
+.bAddr {
+    padding: 5px;
+    background-color: white;
+    border: 1px solid #888;
+    border-radius: 5px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+    font-size: 14px;
+}
+
+.bAddr .title {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* 현재위치 검색 css */
+.hint {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+    top: 30px; /* 체크박스 위치에 맞춰 조정 */
+    left: 0;
+    z-index: 1000;
+}
+
+#currentLocation:hover + .hint {
+    display: block;
+}
+
+/* 체크박스와 clearButton 사이의 간격 추가 */
+#currentLocation {
+    margin-right: 10px; /* 간격을 조절하려면 이 값을 변경하세요 */
+}
+
+/* 정보 창의 X 버튼 스타일 설정 */
+.placeinfo .closeButton {
+    position: absolute; /* 절대 위치 설정 */
+    right: 10px; /* 오른쪽에서 10px 떨어진 위치 */
+    bottom: 10px; /* 아래에서 10px 떨어진 위치 */
+    background: none; /* 배경 제거 */
+    border: none; /* 테두리 제거 */
+    color: #007BFF; /* 텍스트 색상을 파란색으로 */
+    font-size: 14px; /* 글자 크기 */
+    cursor: pointer; /* 커서를 손가락 모양으로 변경 */
+    font-weight: bold; /* 글자를 굵게 표시 */
+}
+
+/* X 버튼에 마우스를 올렸을 때 스타일 */
+.placeinfo .closeButton:hover {
+    color: #0056b3; /* 조금 더 어두운 파란색으로 변경 */
+}
+
+/* 로그인 버튼 CSS 시작 ----------------------------------------------------------------------------------------------------------- */
+/* 로그인, 로그아웃 버튼을 감싸는 컨테이너 */
+/* authButtons 클래스의 p 태그를 지도 외부 오른쪽 하단에 위치시키기 */
+
+.authButtons {
+    position: absolute;
+    bottom: 12%; /* 지도 하단 외부에 배치 */
+    right: 1%; /* 지도 오른쪽 외부에 배치 */
+    display: flex; /* 버튼들을 수평으로 배치 */
+    gap: 10px; /* 버튼들 사이의 간격 */
+    z-index: 2; /* 지도보다 위에 표시되도록 설정 */
+    align-items: center; /* 버튼과 이미지 수직 정렬 */
+}
+
+/* 로그인, 로그아웃 버튼 공통 스타일 */
+#loginButton, #logoutButton {
+    padding: 8px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex-shrink: 0; /* 버튼 크기를 고정 */
+}
+
+/* 처음에 로그아웃 버튼 숨기기 */
+#logoutButton {
+    display: none;
+}
+
+/* 프로필 이미지 스타일 */
+#profileImage {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 10px;
+    flex-shrink: 0; /* 프로필 이미지 크기를 고정 */
+}
+
+/* 버튼에 마우스를 올렸을 때 */
+#loginButton:hover, #logoutButton:hover {
+    background-color: #0056b3;
+}
+
+/* 버튼을 클릭했을 때 */
+#loginButton:active, #logoutButton:active {
+    background-color: #004085;
+}
+
+
+
+/* 로그인 버튼 CSS 끝 ----------------------------------------------------------------------------------------------------------- */
+
+
+
+

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 프로필</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .profile-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .profile-container img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+        }
+
+        .profile-container h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .profile-container p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <img id="profileImage" src="" alt="프로필 사진">
+        <h2 id="nickname">닉네임</h2>
+        <p id="email">이메일</p>
+        <a href="index.html" class="back-button">돌아가기</a>
+    </div>
+
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        // Kakao JavaScript SDK 초기화
+        Kakao.init('724ffdf5351fa8e1f363b8181909e85f'); // 앱의 JavaScript 키를 사용
+        console.log(Kakao.isInitialized()); // SDK 초기화 확인
+
+        // 로그인한 사용자의 정보를 가져와서 표시
+        Kakao.API.request({
+            url: '/v2/user/me',
+            success: function(res) {
+                console.log('사용자 정보: ', res);
+
+                // 프로필 이미지, 닉네임, 이메일 설정
+                document.getElementById('profileImage').src = res.kakao_account.profile?.profile_image_url || 'default-profile.png';
+                document.getElementById('nickname').textContent = res.kakao_account.profile?.nickname || '닉네임 없음';
+                document.getElementById('email').textContent = res.kakao_account.email || '이메일 없음';
+            },
+            fail: function(error) {
+                console.log('사용자 정보 요청 실패', error);
+                alert('사용자 정보를 불러오는 데 실패했습니다.');
+            }
+        });
+    </script>
+</body>
+</html>
