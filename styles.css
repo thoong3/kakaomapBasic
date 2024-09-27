@@ -638,5 +638,318 @@
 /* 로그인 버튼 CSS 끝 ----------------------------------------------------------------------------------------------------------- */
 
 
+/* 업데이트 메시지 팝업 스타일 시작------------------------------------------------------------------------------------------------*/
+.messageModal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed; /* 화면 중앙에 고정 */
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* 배경을 더 어둡게 */
+}
 
+.messageModal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #007BFF; /* 파란색 배경 */
+    color: white; /* 흰색 텍스트 */
+    padding: 30px;
+    border: none; /* 테두리 제거 */
+    border-radius: 16px; /* 부드러운 모서리 */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* 그림자 효과 강화 */
+    width: 320px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 트렌디한 폰트 */
+    font-size: 16px; /* 텍스트 크기 */
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    font-size: 24px;
+    cursor: pointer;
+    color: white; /* 흰색 닫기 버튼(X자) */
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #FF5A5F; /* 닫기 버튼에 마우스를 올렸을 때 색상 변경 */
+}
+
+
+/* 업데이트 메시지 팝업 스타일 끝------------------------------------------------------------------------------------------------*/
+
+/* 로드뷰 관련 css 스타일 시작------------------------------------------------- */
+#container {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+}
+#mapWrapper {width:100%; height:100%; position:relative; z-index:1;}
+#rvWrapper {width:70%; height:100%; position:absolute; top:0; right:0; z-index:0; display:none;}
+#container.view_roadview #mapWrapper {width:30%;}
+#roadviewControl {position:absolute; top:25px; right:400px; width:42px; height:42px; z-index:1; cursor:pointer; background:url(https://t1.daumcdn.net/localimg/localimages/07/2018/pc/common/img_search.png) 0 -450px no-repeat;}
+#roadviewControl.active {background-position:0 -350px;}
+#close {position:absolute; padding:4px; top:5px; left:5px; cursor:pointer; background:#fff; border-radius:4px; border:1px solid #c8c8c8; box-shadow:0px 1px #888;}
+#close .img {display:block; background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/rv_close.png) no-repeat; width:14px; height:14px;}
+
+/* 로드뷰 관련 css 스타일 끝------------------------------------------------- */
+
+/* 데이터 저장 및 불러오기 버튼 컨테이너 스타일 -------------------------------------------------------------------------*/
+.getdata {
+    position: absolute; /* 페이지 내 위치를 고정 */
+    top: 86%; /* 페이지 상단에서 20px 아래로 */
+    left: 10px; /* 페이지 왼쪽에서 20px 오른쪽으로 */
+    z-index: 3; /* 다른 요소보다 위에 표시되도록 설정 */
+    background-color: #f9f9f9; /* 배경색을 흰색으로 */
+    border: 2px solid #007BFF; /* 파란색 테두리 */
+    padding: 10px; /* 내부 여백 */
+    border-radius: 8px; /* 모서리를 둥글게 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    display: flex; /* 버튼을 수평으로 배치 */
+    gap: 10px; /* 버튼 사이 간격 */
+}
+
+/* 데이터 저장 및 불러오기 버튼 스타일 */
+.getdata button {
+    font-size: 14px; /* 글자 크기 */
+    padding: 8px 16px; /* 버튼 내부 여백 */
+    border-radius: 8px; /* 모서리를 둥글게 */
+    border: none; /* 테두리 제거 */
+    background-color: #007BFF; /* 파란색 배경 */
+    color: white; /* 버튼 텍스트 색상을 흰색으로 */
+    cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+    transition: background-color 0.3s, transform 0.2s; /* 색상과 크기 변화에 애니메이션 효과 추가 */
+}
+
+/* 버튼에 마우스를 올렸을 때 배경색과 크기를 변경 */
+.getdata button:hover {
+    background-color: #0056b3; /* 더 어두운 파란색 */
+    transform: scale(1.05); /* 버튼이 약간 커지도록 */
+}
+
+/* 저장된 데이터 리스트 및 커스텀마커 리스트 스타일 통일 */
+#savedDataList, #customMarkerList {
+    display: none; /* 처음에는 숨김 처리 */
+    position: absolute;
+    top: 93%; /* getdata 컨테이너 바로 아래에 위치 */
+    left: 10px;
+    width: 600px;
+    background-color: rgba(255, 255, 255, 0.9); /* 반투명 흰색 배경 */
+    border: 2px solid #007BFF; /* 파란색 테두리 */
+    border-radius: 8px; /* 모서리를 둥글게 */
+    padding: 10px; /* 내부 여백 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    z-index: 1; /* getdata보다 아래에 표시되도록 설정 */
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+/* 데이터 리스트 내부 요소 스타일 통일 */
+#savedDataList ul, #customMarkerList ul {
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    list-style-type: none; /* 불릿 스타일 제거 */
+}
+
+/* 리스트 항목 스타일 통일 */
+#savedDataList li, #customMarkerList li {
+    margin-bottom: 5px;
+    padding: 8px;
+    background-color: #f9f9f9;
+    border: 1px solid #007BFF;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* 리스트 항목에 마우스를 올렸을 때 */
+#savedDataList li:hover, #customMarkerList li:hover {
+    background-color: #e6f2ff;
+}
+
+/* 카테고리 선택 모달 창 스타일 통일 */
+#selectObjectCategoryModal, #selectCustomMarkerCategoryModal {
+    position: absolute;
+    bottom: 5%; /* 부모 요소의 하단에서 5% 위로 */
+    right: 10px;
+    width: 300px;
+    background-color: #f9f9f9;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* 카테고리 선택 모달 창 제목 스타일 통일 */
+#selectObjectCategoryModal h3, #selectCustomMarkerCategoryModal h3 {
+    font-size: 16px;
+    color: #007BFF;
+    margin-bottom: 10px;
+}
+
+/* 카테고리 선택 모달 창 드롭다운 스타일 통일 */
+#selectObjectCategoryDropdown, #selectCustomMarkerCategoryDropdown {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+}
+
+/* 카테고리 선택 모달 창 버튼 스타일 통일 */
+#selectObjectCategoryModal button, #selectCustomMarkerCategoryModal button {
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-right: 5px;
+}
+
+/* 모달 창 버튼에 마우스를 올렸을 때 */
+#selectObjectCategoryModal button:hover, #selectCustomMarkerCategoryModal button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* 공통 버튼 스타일 (불러오기 및 삭제 버튼에 적용) */
+.load-delete-btn {
+    font-size: 12px; /* 글자 크기 */
+    padding: 4px 8px; /* 버튼 내부 여백 */
+    border-radius: 4px; /* 모서리를 둥글게 */
+    border: none; /* 테두리 제거 */
+    background-color: #007BFF; /* 파란색 배경 */
+    color: white; /* 텍스트 색상을 흰색으로 */
+    cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+    transition: background-color 0.3s, transform 0.2s; /* 색상과 크기 변화에 애니메이션 효과 추가 */
+    margin-left: 5px; /* 버튼 사이 간격 */
+}
+
+/* 버튼에 마우스를 올렸을 때 배경색과 크기를 변경 */
+.load-delete-btn:hover {
+    background-color: #0056b3; /* 더 어두운 파란색 */
+    transform: scale(1.05); /* 버튼이 약간 커지도록 */
+}
+
+
+/* 데이터 저장 및 불러오기 버튼 컨테이너 스타일 -------------------------------------------------------------------------*/
+
+/* 사이드바 기본 스타일 시작 -------------------------------------------------------------------------------------------*/
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #007BFF; /* 파란색 배경 */
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar-content {
+    color: white;
+    padding: 20px;
+}
+
+.sidebar-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-content ul li {
+    margin: 20px 0;
+}
+
+.sidebar-content ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* 마우스가 올려졌을 때 텍스트 색상 빨간색으로 */
+.sidebar-content ul li a:hover {
+    color: red; /* 글씨가 빨간색으로 변경 */
+}
+
+.sidebar-footer {
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    text-align: center;
+    color: white; /* 흰색 글씨 */
+    font-size: 14px; /* 글씨 크기 조정 */
+    padding: 10px 0; /* 위아래 여백 추가 */
+    background-color: #0056b3; /* 다소 진한 파란색으로 변경 */
+}
+
+/* 사이드바 열릴 때 */
+.sidebar.open {
+    width: 250px;
+}
+
+/* 메뉴 버튼 스타일 */
+#menuButton {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+}
+
+/* 메뉴 버튼에 마우스 올렸을 때 글씨 색상 변경 */
+#menuButton:hover {
+    color: red; /* 글씨를 빨간색으로 변경 */
+}
+/* 사이드바 기본 스타일 끝 -------------------------------------------------------------------------------------------*/
+
+/* 모달 창 스타일 */
+.modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    top: 20%;
+    border-radius: 10px;
+}
+
+.marker-images img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
 
